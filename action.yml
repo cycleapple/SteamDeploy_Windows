@@ -1,0 +1,74 @@
+name: 'Steam - Deploy'
+author: Ming Tu <ming@001studio.com.tw>
+description: 'Deploy game builds to Steam using the SteamSDK.'
+inputs:
+  steamcmdPath:
+    required: true
+    default: ''
+    description: 'The full path for steamcmd .'
+  username:
+    required: true
+    default: ''
+    description: 'The username of your builder account.' 
+  userpwd:
+    required: true
+    default: ''
+    description: 'The user password of your builder account.'
+  appId:
+    required: true
+    default: ''
+    description: 'The app id within steam partner network.'
+  depotId:
+    required: true
+    description: 'The depot id within steam partner network.'
+  rootPath:
+    required: true
+    description: 'The root path to your builds. This is the base of which depots will search your files.'
+  buildDescription:
+    required: false
+    description: 'Description for this build.'
+  releaseBranch:
+    required: false
+    description: 'The branch within steam that this build will be automatically put live on.'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Read Template App Build Script
+      shell: cmd
+      run: |
+        # Read the content of the template app build script
+        $templateAppScriptContent = Get-Content "${{ github.workspace }}/app_template.vdf"
+        
+        # Replace the depotId in the template with the provided value from the input
+        $depotId = ${{ inputs.depotId }}
+        $templateAppScriptContent = $templateAppScriptContent -replace '("depots"\s*\{[\s\S]*?)"100002"', "`$1`"$depotId`""
+
+        # Replace placeholders in the template with pull request number and setlive value
+        $desc = ${{ inputs.buildDescription }}
+        $setLiveValue = ${{ inputs.releaseBranch }}
+        $templateAppScriptContent = $templateAppScriptContent -replace '("desc" ")(.*?)(")', "`$1$desc`$3"
+        $templateAppScriptContent = $templateAppScriptContent -replace '("setlive" ")(.*?)(")', "`$1$setLiveValue`$3"
+
+        # Write the modified content to a new app build script file
+        $buildAppScriptPath = "${{ github.workspace }}/app_build_script.vdf"
+        $templateAppScriptContent | Out-File $buildAppScriptPath -Encoding UTF8
+        
+    - name: Read Template Depot Build Script
+      shell: cmd
+      run: |
+        # Read the content of the template depot build script
+        $templateAppScriptContent = Get-Content "${{ github.workspace }}/depot_template.vdf"
+
+        # Replace placeholders in the template with pull request number
+        $buildPath = ${{ inputs.rootPath }}
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
+
+        # Write the modified content to a new depot build script file
+        $buildDepotScriptPath = "${{ github.workspace }}/depot_build_script.vdf"
+        $templateDepotScriptContent | Out-File $buildDepotScriptPath -Encoding UTF8
+        
+    - name: SteamDeploy
+      shell: cmd
+      run: |
+        ${{inputs.steamcmdPath}} +login ${{inputs.username}} ${{inputs.userpwd}} +run_app_build "${{ github.workspace }}/app_build_script.vdf" +quit    
