@@ -1,4 +1,4 @@
-name: 'Steam - Deploy'
+name: 'Steam Deploy For Windows'
 author: Ming Tu <ming@001studio.com.tw>
 description: 'Deploy game builds to Steam using the SteamSDK.'
 inputs:
