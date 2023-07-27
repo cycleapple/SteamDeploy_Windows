@@ -1,7 +1,7 @@
 "DepotBuildConfig"
 {
-	"DepotID" "968771"
-	"ContentRoot" "C:\actions-runner\_work\CICDExample\CICDExample\Build\PR-Number"
+	"DepotID" "100002"
+	"ContentRoot" "contentRoot"
 
   "FileMapping"
   {

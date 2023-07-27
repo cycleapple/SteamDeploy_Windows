@@ -1,15 +1,15 @@
 "appbuild"
 {
-	"appid"	"100001"
-	"desc" "Build_Description" 
+	"appid"	""
+	"desc" "" 
 	"buildoutput" "..\output\" 
 	"contentroot" "..\content\" 
-	"setlive" "Branch"
+	"setlive" ""
 	"preview" "0" 
 	"local"	""	
 	
 	"depots"
 	{
-		"968771" "depot_build_968771.vdf"
+		"100002" "depot_build_script.vdf"
 	}
 }
