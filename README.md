@@ -5,7 +5,7 @@ Description
 -----------
 
 This GitHub Action allows you to deploy game builds to Steam using the SteamSDK. It automates the process of modifying
-the necessary build scripts and deploying your game builds to Steam with ease, is designed for windows self-runner.
+the necessary build scripts and deploying your game builds to Steam with ease, is designed for windows self-hosted runner.
 
 
 ### Inputs
