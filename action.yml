@@ -71,4 +71,8 @@ runs:
     - name: SteamDeploy
       shell: cmd
       run: |
-        ${{inputs.steamcmdPath}} +login ${{inputs.username}} ${{inputs.userpwd}} +run_app_build "${{ github.workspace }}/app_build_script.vdf" +quit    
+        ${{inputs.steamcmdPath}} +login ${{inputs.username}} ${{inputs.userpwd}} +run_app_build "${{ github.workspace }}/app_build_script.vdf" +quit   
+
+branding:
+  icon: 'upload'
+  color: 'blue'
