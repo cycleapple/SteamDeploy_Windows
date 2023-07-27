@@ -27,17 +27,20 @@ The action requires the following inputs:
 Here's an example of how to use the "Steam - Deploy" action in your GitHub workflow:
 
 ```
-      - name: Deploy to Steam
-        uses: cycleapple/SteamDeploy_Windows@v1
-        with:
-          steamcmdPath: '/path/to/steamcmd'
-          username: ${{ secrets.STEAM_USERNAME }}
-          userpwd: ${{ secrets.STEAM_PASSWORD }}
-          appId: 'your_app_id'
-          depotId: 'your_depot_id'
-          rootPath: '/path/to/your/builds'
-          buildDescription: 'Your build description'
-          releaseBranch: 'Your release branch'
+      Deploy to Steam
+        runs-on: self-hosted
+        steps:
+        - name: Deploy to Steam
+          uses: cycleapple/SteamDeploy_Windows@v1
+          with:
+            steamcmdPath: '/path/to/steamcmd'
+            username: ${{ secrets.STEAM_USERNAME }}
+            userpwd: ${{ secrets.STEAM_PASSWORD }}
+            appId: 'your_app_id'
+            depotId: 'your_depot_id'
+            rootPath: '/path/to/your/builds'
+            buildDescription: 'Your build description'
+            releaseBranch: 'Your release branch'
 
 ```
 
