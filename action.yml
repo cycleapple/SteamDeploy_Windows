@@ -62,9 +62,8 @@ runs:
         # Read the content of the template depot build script
         $templateDepotScriptContent = Get-Content "${{ github.action_path }}\template\depot_template.vdf"
 
-        # Replace placeholders in the template with pull request number
-        $depotId = ${{ inputs.depotId }}
-        $templateDepotScriptContent = $templateDepotScriptContent -replace '"DepotID"\s+".*?"', '"DepotID" "' + $depotId + '"'
+        $depotID = '${{ inputs.depotID }}'
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID" ")(.*?)(")', "`$1${depotID}`$3"
 
         $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
