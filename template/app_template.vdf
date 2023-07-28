@@ -1,6 +1,6 @@
 "appbuild"
 {
-	"appid"	""
+	"appid" ""
 	"desc" "" 
 	"buildoutput" "..\output\" 
 	"contentroot" "..\content\" 
