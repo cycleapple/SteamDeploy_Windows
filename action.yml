@@ -50,7 +50,7 @@ runs:
         
         # Replace the depotId in the template with the provided value from the input
         $depotId = ${{ inputs.depotId }}
-        $templateAppScriptContent = $templateAppScriptContent -replace '("")\s+"depot_build_script\.vdf"', "`"$depotId`" `"$1 depot_build_script.vdf`""
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID"\s+")(\d+)', "`$1$depotId"
 
         # Write the modified content to a new app build script file
         $buildAppScriptPath = "${{ github.workspace }}/app_build_script.vdf"
@@ -62,7 +62,7 @@ runs:
         # Read the content of the template depot build script
         $templateDepotScriptContent = Get-Content "${{ github.action_path }}\template\depot_template.vdf"
 
-        $depotID = '${{ inputs.depotID }}'
+        $depotID = '${{ inputs.depotId }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID" ")(.*?)(")', "`$1${depotID}`$3"
 
         $buildPath = '${{ inputs.rootPath }}'
