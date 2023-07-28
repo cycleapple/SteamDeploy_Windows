@@ -62,8 +62,8 @@ runs:
         # Read the content of the template depot build script
         $templateDepotScriptContent = Get-Content "${{ github.action_path }}\template\depot_template.vdf"
 
-        $depotID = '${{ inputs.depotId }}'
-        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID"\s+")(\d+)', "`$1$depotId"
+        $depotID = ${{ inputs.depotId }}
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID"\s+")"', "`$1$depotID`""
 
         $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
