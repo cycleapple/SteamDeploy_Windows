@@ -3,7 +3,7 @@
 	"appid" ""
 	"desc" "" 
 	"buildoutput" "..\output\" 
-	"contentroot" "..\content\" 
+	"contentroot" "" 
 	"setlive" ""
 	"preview" "0" 
 	"local"	""	
