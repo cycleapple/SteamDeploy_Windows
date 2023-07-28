@@ -41,10 +41,10 @@ runs:
         $templateAppScriptContent = Get-Content "${{ github.action_path }}\template\app_template.vdf"
 
         # Replace placeholders in the template with pull request number and setlive value
-        $appid = '${{ inputs.appId }}'
+        $appId = ${{ inputs.appId }}
         $desc = '${{ inputs.buildDescription }}'
         $setLiveValue = '${{ inputs.releaseBranch }}'
-        $templateAppScriptContent = $templateAppScriptContent -replace '("appid" ")(.*?)(")', "`$1$appid`$3"
+        $templateAppScriptContent = $templateAppScriptContent -replace '"appid"\s+"', '"appid" "' + $appId + '"'
         $templateAppScriptContent = $templateAppScriptContent -replace '("desc" ")(.*?)(")', "`$1$desc`$3"
         $templateAppScriptContent = $templateAppScriptContent -replace '("setlive" ")(.*?)(")', "`$1$setLiveValue`$3"
         
@@ -64,7 +64,8 @@ runs:
 
         # Replace placeholders in the template with pull request number
         $depotId = '${{ inputs.depotId }}'
-        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID" ")(.*?)(")', "`$1${depotId}`$3"
+        $templateAppScriptContent = $templateAppScriptContent -replace '"DepotID"\s+"', '"DepotID" "' + $depotId + '"'
+
         $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
 
