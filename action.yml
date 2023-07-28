@@ -62,8 +62,9 @@ runs:
         # Read the content of the template depot build script
         $templateDepotScriptContent = Get-Content "${{ github.action_path }}\template\depot_template.vdf"
 
-        $depotID = ${{ inputs.depotId }}
-        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID"\s+")"', "`$1$depotID`""
+        # Replace the DepotID in the template with the provided value from the input
+        $depotID = $env:INPUT_DEPOTID  # Access the input variable as an environment variable
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '(?<="DepotID"\s+")[^"]*', $depotID
 
         $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
