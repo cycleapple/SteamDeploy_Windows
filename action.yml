@@ -41,12 +41,12 @@ runs:
         $templateAppScriptContent = Get-Content "${{ github.action_path }}\template\app_template.vdf"
         
         # Replace the depotId in the template with the provided value from the input
-        $depotId = ${{ inputs.depotId }}
+        $depotId = '${{ inputs.depotId }}'
         $templateAppScriptContent = $templateAppScriptContent -replace '("depots"\s*\{[\s\S]*?)"100002"', "`$1`"$depotId`""
 
         # Replace placeholders in the template with pull request number and setlive value
-        $desc = ${{ inputs.buildDescription }}
-        $setLiveValue = ${{ inputs.releaseBranch }}
+        $desc = '${{ inputs.buildDescription }}'
+        $setLiveValue = '${{ inputs.releaseBranch }}'
         $templateAppScriptContent = $templateAppScriptContent -replace '("desc" ")(.*?)(")', "`$1$desc`$3"
         $templateAppScriptContent = $templateAppScriptContent -replace '("setlive" ")(.*?)(")', "`$1$setLiveValue`$3"
 
@@ -61,7 +61,7 @@ runs:
         $templateAppScriptContent = Get-Content "${{ github.action_path }}\template\depot_template.vdf"
 
         # Replace placeholders in the template with pull request number
-        $buildPath = ${{ inputs.rootPath }}
+        $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
 
         # Write the modified content to a new depot build script file
