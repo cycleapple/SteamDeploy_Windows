@@ -64,7 +64,7 @@ runs:
 
         # Replace placeholders in the template with pull request number
         $depotId = '${{ inputs.depotId }}'
-        $templateDepotScriptContent = $templateDepotScriptContent -replace '("DepotID" ")(.*?)(")', "`$1$depotId`$3"
+        $templateDepotScriptContent = $templateDepotScriptContent -replace '(?<="DepotID" ")(.*?)(?=")', $depotId
 
         $buildPath = '${{ inputs.rootPath }}'
         $templateDepotScriptContent = $templateDepotScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
