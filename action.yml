@@ -35,7 +35,7 @@ runs:
   using: "composite"
   steps:
     - name: Read Template App Build Script
-      shell: cmd
+      shell: powershell
       run: |
         # Read the content of the template app build script
         $templateAppScriptContent = Get-Content "${{ github.workspace }}/app_template.vdf"
@@ -55,7 +55,7 @@ runs:
         $templateAppScriptContent | Out-File $buildAppScriptPath -Encoding UTF8
         
     - name: Read Template Depot Build Script
-      shell: cmd
+      shell: powershell
       run: |
         # Read the content of the template depot build script
         $templateAppScriptContent = Get-Content "${{ github.workspace }}/depot_template.vdf"
