@@ -38,7 +38,7 @@ runs:
       shell: powershell
       run: |
         # Read the content of the template app build script
-        $templateAppScriptContent = Get-Content "${{ github.workspace }}/app_template.vdf"
+        $templateAppScriptContent = Get-Content "${{ github.workspace }}\template\app_template.vdf"
         
         # Replace the depotId in the template with the provided value from the input
         $depotId = ${{ inputs.depotId }}
@@ -58,7 +58,7 @@ runs:
       shell: powershell
       run: |
         # Read the content of the template depot build script
-        $templateAppScriptContent = Get-Content "${{ github.workspace }}/depot_template.vdf"
+        $templateAppScriptContent = Get-Content "${{ github.workspace }}\template\depot_template.vdf"
 
         # Replace placeholders in the template with pull request number
         $buildPath = ${{ inputs.rootPath }}
