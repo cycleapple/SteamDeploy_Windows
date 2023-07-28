@@ -50,7 +50,7 @@ runs:
         
         # Replace the depotId in the template with the provided value from the input
         $depotId = ${{ inputs.depotId }}
-        $templateAppScriptContent = $templateAppScriptContent -replace '("")\s+"depot_build_script\.vdf"', "`"$depotId`" `"$1 depot_build_script.vdf`""
+        $templateAppScriptContent = $templateAppScriptContent -replace '("")\s+"depot_build_script\.vdf"', "`"$depotId`" `"$1depot_build_script.vdf`""
         
         $buildPath = '${{ inputs.rootPath }}'
         $templateAppScriptContent = $templateAppScriptContent -replace '("ContentRoot" ")(.*?)(")', "`$1${buildPath}`$3"
