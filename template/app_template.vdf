@@ -10,6 +10,6 @@
 	
 	"depots"
 	{
-		"100002" "depot_build_script.vdf"
+		"" "depot_build_script.vdf"
 	}
 }

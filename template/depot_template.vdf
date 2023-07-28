@@ -1,7 +1,7 @@
 "DepotBuildConfig"
 {
-	"DepotID" "100002"
-	"ContentRoot" "contentRoot"
+	"DepotID" ""
+	"ContentRoot" ""
 
   "FileMapping"
   {
